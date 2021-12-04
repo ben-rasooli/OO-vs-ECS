@@ -1,0 +1,16 @@
+{
+    "name": "OO",
+    "rootNamespace": "",
+    "references": [
+        "GUID:baea10adbfdf14b64a00327ab94d9a2a"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
