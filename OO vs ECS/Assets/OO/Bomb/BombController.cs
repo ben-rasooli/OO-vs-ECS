@@ -4,8 +4,9 @@ public class BombController : MonoBehaviour
 {
   [SerializeField] Vector3 _infoTextOffset;
 
-  public void Init(float explosionDelay, float explosionRadius, int damage)
+  public void Init(BombType type, float explosionDelay, float explosionRadius, int damage)
   {
+    _myType = type;
     _explosionRadius = explosionRadius;
     _damage = damage;
     _timer = explosionDelay;
@@ -42,12 +43,13 @@ public class BombController : MonoBehaviour
     var crates = FindObjectsOfType<CrateController>();
     foreach (var crate in crates)
       if (Vector3.Distance(transform.position, crate.Position) <= _explosionRadius)
-        crate.TakeDamage(_damage);
+        crate.TakeDamage(_myType, _damage);
     Destroy(gameObject);
   }
 
   UIManager _UIManager;
   Camera _mainCamera;
+  BombType _myType;
   float _timer;
   float _explosionRadius;
   int _damage;

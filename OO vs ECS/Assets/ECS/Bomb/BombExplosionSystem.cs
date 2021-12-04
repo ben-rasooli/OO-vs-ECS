@@ -17,7 +17,7 @@ public class BombExplosionSystem : SystemBase
     var ECB = _ECBSys.CreateCommandBuffer();
     var crateEntities = _crates_entityQuery.ToEntityArray(Allocator.TempJob);
     var crateTranslations = _crates_entityQuery.ToComponentDataArray<Translation>(Allocator.TempJob);
-    var crates = _crates_entityQuery.ToComponentDataArray<Crate>(Allocator.TempJob);
+
     Entities
       .WithAll<Ready_tag>()
       .ForEach((Entity entity, in Bomb bomb, in Translation translation) =>
@@ -28,27 +28,15 @@ public class BombExplosionSystem : SystemBase
           var distanceToCrate = math.distance(translation.Value, crateTranslations[i].Value);
           if (distanceToCrate <= bomb.ExplosionRadius)
           {
-            int damage = 0;
-            switch (crates[i].Type)
-            {
-              case CrateType.Yellow:
-                damage = bomb.Damage;
-                break;
-              case CrateType.Red:
-                damage = (int)math.ceil(bomb.Damage / 2f);
-                break;
-              case CrateType.Blue:
-                damage = bomb.Damage * 2;
-                break;
-            }
-            ECB.AddSingleFrameComponent(crateEntities[i], new Damage { Value = damage });
-            Debug.Log($"{crates[i].Type} crate took {damage} damage. Actual bomb's damage was {bomb.Damage}");
+            if (bomb.Type == BombType.Chilly)
+              ECB.AddComponent(crateEntities[i], new AffectedByChillyBomb { Damage = bomb.Damage });
+            else if (bomb.Type == BombType.Pepper)
+              ECB.AddComponent(crateEntities[i], new AffectedByPepperBomb { Damage = bomb.Damage });
           }
         }
       })
       .WithDisposeOnCompletion(crateEntities)
       .WithDisposeOnCompletion(crateTranslations)
-      .WithDisposeOnCompletion(crates)
       .WithoutBurst().Schedule();
 
     _ECBSys.AddJobHandleForProducer(Dependency);

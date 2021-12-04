@@ -19,6 +19,7 @@ public class Bomb_authoring : MonoBehaviour, IConvertGameObjectToEntity
 
 public struct Bomb : IComponentData
 {
+  public BombType Type;
   public float ExplosionRadius;
   public int Damage;
 }

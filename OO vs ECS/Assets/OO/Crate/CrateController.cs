@@ -1,29 +1,10 @@
 using UnityEngine;
 
-public class CrateController : MonoBehaviour
+public abstract class CrateController : MonoBehaviour
 {
   [SerializeField] Vector3 _infoTextOffset;
 
-  public void TakeDamage(int value)
-  {
-    int damage = 0;
-    switch (_myType)
-    {
-      case CrateType.Yellow:
-        damage = value;
-        break;
-      case CrateType.Red:
-        damage = Mathf.CeilToInt(value / 2f);
-        break;
-      case CrateType.Blue:
-        damage = value * 2;
-        break;
-    }
-    setHealth(_health - damage);
-    if (_health <= 0)
-      Destroy(gameObject);
-    Debug.Log($"{_myType} crate took {damage} damage. Actual bomb's damage was {value}");
-  }
+  public abstract void TakeDamage(BombType _myType, int value);
 
   public Vector3 Position => transform.position;
 
@@ -50,7 +31,7 @@ public class CrateController : MonoBehaviour
     _UIManager.RemoveUIText(gameObject.GetInstanceID());
   }
 
-  void setHealth(int value)
+  protected void setHealth(int value)
   {
     _health = value;
     _UIManager.SetUIText(gameObject.GetInstanceID(), _health.ToString());
@@ -58,6 +39,6 @@ public class CrateController : MonoBehaviour
 
   UIManager _UIManager;
   Camera _mainCamera;
-  int _health;
-  CrateType _myType;
+  protected int _health;
+  protected CrateType _myType;
 }

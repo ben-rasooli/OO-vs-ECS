@@ -209,7 +209,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 703ac7c5972404053bdd3716f0300e89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bombPrefab: {fileID: 4460699796211055769, guid: 9dc355d38b31147f2ad6b4b0f77a5110, type: 3}
+  _chillyBombPrefab: {fileID: 4460699796211055769, guid: 9dc355d38b31147f2ad6b4b0f77a5110, type: 3}
+  _pepperBombPrefab: {fileID: 4460699796211055769, guid: 664e9a9f206824e5095eab5e712614b9, type: 3}
   _yellowCratePrefab: {fileID: 1056947741950648025, guid: 8240ee91dc85a412e86612c48c21782e, type: 3}
   _redCratePrefab: {fileID: 1056947741950648025, guid: d4dc87ff1fcc3423ea53e88e4768b2cd, type: 3}
   _blueCratePrefab: {fileID: 1056947741950648025, guid: 218407a409f454307a599a3396423cc3, type: 3}

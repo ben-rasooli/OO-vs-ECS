@@ -3,14 +3,16 @@ using UnityEngine.UI;
 
 public class InputUI : MonoBehaviour
 {
-  [SerializeField] Button _bombButton;
+  [SerializeField] Button _chillyBombButton;
+  [SerializeField] Button _pepperBombButton;
   [SerializeField] Button _yellowCrateButton;
   [SerializeField] Button _redCrateButton;
   [SerializeField] Button _blueCrateButton;
 
   void OnEnable()
   {
-    _bombButton.onClick.AddListener(spawnBomb);
+    _chillyBombButton.onClick.AddListener(() => spawnBomb(BombType.Chilly));
+    _pepperBombButton.onClick.AddListener(() => spawnBomb(BombType.Pepper));
     _yellowCrateButton.onClick.AddListener(() => spawnCrate(CrateType.Yellow));
     _redCrateButton.onClick.AddListener(() => spawnCrate(CrateType.Red));
     _blueCrateButton.onClick.AddListener(() => spawnCrate(CrateType.Blue));
@@ -18,7 +20,8 @@ public class InputUI : MonoBehaviour
 
   void OnDisable()
   {
-    _bombButton.onClick.RemoveAllListeners();
+    _chillyBombButton.onClick.RemoveAllListeners();
+    _pepperBombButton.onClick.RemoveAllListeners();
     _yellowCrateButton.onClick.RemoveAllListeners();
     _redCrateButton.onClick.RemoveAllListeners();
     _blueCrateButton.onClick.RemoveAllListeners();
@@ -30,12 +33,13 @@ public class InputUI : MonoBehaviour
     _crateSpawner = FindObjectOfType<CrateSpawner>();
   }
 
-  void spawnBomb()
+  void spawnBomb(BombType bombType)
   {
     Vector2 randomPosition = Random.insideUnitCircle * _groundExtend;
     _bombSpawner.Spawn(
       position: new Vector3(randomPosition.x, 0, randomPosition.y),
-      explosionDelay: 2f);
+      explosionDelay: 2f,
+      bombType);
   }
 
   void spawnCrate(CrateType crateType)

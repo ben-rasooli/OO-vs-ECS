@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3698831131422151467}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 307d70de12d7243a4b884b14f28f6efb, type: 3}
+  m_Script: {fileID: 11500000, guid: 9f7afb04fe65442b4b04828142eaa455, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _infoTextOffset: {x: 0, y: -15, z: 0}
@@ -22,7 +22,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5012676680394196144, guid: b315c150f333a4bc0a8f21ab95de3402, type: 3}
       propertyPath: m_Name
-      value: Crate OO
+      value: Yellow Crate OO
       objectReference: {fileID: 0}
     - target: {fileID: 5012676680394196148, guid: b315c150f333a4bc0a8f21ab95de3402, type: 3}
       propertyPath: m_RootOrder

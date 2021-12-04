@@ -5,7 +5,8 @@ using UnityEngine;
 [DisallowMultipleComponent]
 public class SceneSettings_authoring : MonoBehaviour, IConvertGameObjectToEntity, IDeclareReferencedPrefabs
 {
-  [SerializeField] GameObject _bombPrefab;
+  [SerializeField] GameObject _chillyBombPrefab;
+  [SerializeField] GameObject _pepperBombPrefab;
   [SerializeField] GameObject _yellowCratePrefab;
   [SerializeField] GameObject _redCratePrefab;
   [SerializeField] GameObject _blueCratePrefab;
@@ -14,7 +15,8 @@ public class SceneSettings_authoring : MonoBehaviour, IConvertGameObjectToEntity
   {
     dstManager.AddComponentData(entity, new SceneSettings
     {
-      BombPrefab = conversionSystem.GetPrimaryEntity(_bombPrefab),
+      ChillyBombPrefab = conversionSystem.GetPrimaryEntity(_chillyBombPrefab),
+      PepperBombPrefab = conversionSystem.GetPrimaryEntity(_pepperBombPrefab),
       YellowCratePrefab = conversionSystem.GetPrimaryEntity(_yellowCratePrefab),
       RedCratePrefab = conversionSystem.GetPrimaryEntity(_redCratePrefab),
       BlueCratePrefab = conversionSystem.GetPrimaryEntity(_blueCratePrefab)
@@ -23,7 +25,8 @@ public class SceneSettings_authoring : MonoBehaviour, IConvertGameObjectToEntity
 
   public void DeclareReferencedPrefabs(List<GameObject> referencedPrefabs)
   {
-    referencedPrefabs.Add(_bombPrefab);
+    referencedPrefabs.Add(_chillyBombPrefab);
+    referencedPrefabs.Add(_pepperBombPrefab);
     referencedPrefabs.Add(_yellowCratePrefab);
     referencedPrefabs.Add(_redCratePrefab);
     referencedPrefabs.Add(_blueCratePrefab);
@@ -32,7 +35,8 @@ public class SceneSettings_authoring : MonoBehaviour, IConvertGameObjectToEntity
 
 public struct SceneSettings : IComponentData
 {
-  public Entity BombPrefab;
+  public Entity ChillyBombPrefab;
+  public Entity PepperBombPrefab;
   public Entity YellowCratePrefab;
   public Entity RedCratePrefab;
   public Entity BlueCratePrefab;
