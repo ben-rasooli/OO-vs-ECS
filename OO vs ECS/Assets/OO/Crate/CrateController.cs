@@ -6,16 +6,31 @@ public class CrateController : MonoBehaviour
 
   public void TakeDamage(int value)
   {
-    setHealth(_health - value);
+    int damage = 0;
+    switch (_myType)
+    {
+      case CrateType.Yellow:
+        damage = value;
+        break;
+      case CrateType.Red:
+        damage = Mathf.CeilToInt(value / 2f);
+        break;
+      case CrateType.Blue:
+        damage = value * 2;
+        break;
+    }
+    setHealth(_health - damage);
     if (_health <= 0)
       Destroy(gameObject);
+    Debug.Log($"{_myType} crate took {damage} damage. Actual bomb's damage was {value}");
   }
 
   public Vector3 Position => transform.position;
 
-  public void Init(int health)
+  public void Init(int health, CrateType type)
   {
     setHealth(health);
+    _myType = type;
   }
 
   public void SetPosition(Vector3 value)
@@ -44,4 +59,5 @@ public class CrateController : MonoBehaviour
   UIManager _UIManager;
   Camera _mainCamera;
   int _health;
+  CrateType _myType;
 }

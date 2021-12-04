@@ -18,7 +18,21 @@ public class CrateSpawnerSystem : SystemBase
 
     Entities.ForEach((ref SpawnCrate_command command) =>
     {
-      Entity crate = ECB.Instantiate(sceneSettings.CratePrefab);
+      Entity cratePrefab = default;
+      switch (command.CrateType)
+      {
+        case CrateType.Yellow:
+          cratePrefab = sceneSettings.YellowCratePrefab;
+          break;
+        case CrateType.Red:
+          cratePrefab = sceneSettings.RedCratePrefab;
+          break;
+        case CrateType.Blue:
+          cratePrefab = sceneSettings.BlueCratePrefab;
+          break;
+      }
+      Entity crate = ECB.Instantiate(cratePrefab);
+      ECB.SetComponent(crate, new Crate { Type = command.CrateType });
       ECB.SetComponent(crate, new Translation { Value = command.Position });
       ECB.SetComponent(crate, new Health { Value = UnityEngine.Random.Range(4, 10) });
     }).WithoutBurst().Run();
@@ -30,4 +44,5 @@ public class CrateSpawnerSystem : SystemBase
 public struct SpawnCrate_command : IComponentData
 {
   public float3 Position;
+  public CrateType CrateType;
 }

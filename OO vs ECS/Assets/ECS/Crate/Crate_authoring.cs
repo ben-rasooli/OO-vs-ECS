@@ -17,4 +17,7 @@ public class Crate_authoring : MonoBehaviour, IConvertGameObjectToEntity
   }
 }
 
-public struct Crate : IComponentData { }
+public struct Crate : IComponentData
+{
+  public CrateType Type;
+}

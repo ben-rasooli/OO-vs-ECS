@@ -4,18 +4,24 @@ using UnityEngine.UI;
 public class InputUI : MonoBehaviour
 {
   [SerializeField] Button _bombButton;
-  [SerializeField] Button _crateButton;
+  [SerializeField] Button _yellowCrateButton;
+  [SerializeField] Button _redCrateButton;
+  [SerializeField] Button _blueCrateButton;
 
   void OnEnable()
   {
     _bombButton.onClick.AddListener(spawnBomb);
-    _crateButton.onClick.AddListener(spawnCrate);
+    _yellowCrateButton.onClick.AddListener(() => spawnCrate(CrateType.Yellow));
+    _redCrateButton.onClick.AddListener(() => spawnCrate(CrateType.Red));
+    _blueCrateButton.onClick.AddListener(() => spawnCrate(CrateType.Blue));
   }
 
   void OnDisable()
   {
     _bombButton.onClick.RemoveAllListeners();
-    _crateButton.onClick.RemoveAllListeners();
+    _yellowCrateButton.onClick.RemoveAllListeners();
+    _redCrateButton.onClick.RemoveAllListeners();
+    _blueCrateButton.onClick.RemoveAllListeners();
   }
 
   void Awake()
@@ -32,10 +38,10 @@ public class InputUI : MonoBehaviour
       explosionDelay: 2f);
   }
 
-  void spawnCrate()
+  void spawnCrate(CrateType crateType)
   {
     Vector2 randomPosition = Random.insideUnitCircle * _groundExtend;
-    _crateSpawner.Spawn(new Vector3(randomPosition.x, 0, randomPosition.y));
+    _crateSpawner.Spawn(new Vector3(randomPosition.x, 0, randomPosition.y), crateType);
   }
 
   float _groundExtend = 7f;
