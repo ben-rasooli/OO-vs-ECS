@@ -8,6 +8,10 @@ public abstract class CrateController : MonoBehaviour
 
   public Vector3 Position => transform.position;
 
+  public CrateType Type => _myType;
+
+  public int Health => _health;
+
   public void Init(int health, CrateType type)
   {
     setHealth(health);
@@ -23,12 +27,15 @@ public abstract class CrateController : MonoBehaviour
   void OnEnable()
   {
     _UIManager = FindObjectOfType<UIManager>();
+    _crateTotalHealthDisplay = FindObjectOfType<CrateTotalHealthDisplay>();
+    _crateTotalHealthDisplay.AddCrateController(this);
     _mainCamera = Camera.main;
   }
 
   void OnDisable()
   {
     _UIManager.RemoveUIText(gameObject.GetInstanceID());
+    _crateTotalHealthDisplay.RemoveCrateController(this);
   }
 
   protected void setHealth(int value)
@@ -38,6 +45,7 @@ public abstract class CrateController : MonoBehaviour
   }
 
   UIManager _UIManager;
+  CrateTotalHealthDisplay _crateTotalHealthDisplay;
   Camera _mainCamera;
   protected int _health;
   protected CrateType _myType;

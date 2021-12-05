@@ -5,6 +5,12 @@ using UnityEngine;
 public class UIManager : MonoBehaviour
 {
   [SerializeField] GameObject _UITextPrefab;
+  [SerializeField] TextMeshProUGUI _totalHealthUIText;
+
+  public void SetTotalHealth(string value)
+  {
+    _totalHealthUIText.text = value;
+  }
 
   public void SetUIText(int ID, string value)
   {
